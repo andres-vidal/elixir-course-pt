@@ -18,7 +18,9 @@ defmodule Funcoes do
     iex> Funcoes.is_zero(-1)
     false
   """
-  def is_zero do
+
+  def is_zero(numero) do
+    numero == 0
   end
 
   @doc """
@@ -42,7 +44,8 @@ defmodule Funcoes do
     iex> Funcoes.type({})
     "tupla"
   """
-  def type do
+  def type(lista) do
+    "lista"
   end
 
   @doc """
@@ -66,8 +69,8 @@ defmodule Funcoes do
     iex> Funcoes.max(-2, -1)
     -1
   """
-  def max do
-  end
+  def max(a, b) when a > b, do: a
+  def max(a, b), do: b
 
   @doc """
   Recebe uma função e um número
@@ -84,6 +87,7 @@ defmodule Funcoes do
     iex> Funcoes.call(fn n -> n - 1 end, 1)
     0
   """
-  def call do
+  def call(f, n) do
+    f.(n)
   end
 end
