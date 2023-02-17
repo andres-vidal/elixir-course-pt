@@ -1,19 +1,21 @@
 defmodule Tarefas.CLI do
   def main(comandos) do
+    IO.inspect(comandos)
+
     caminho_arquivo = Path.join(File.cwd!(), "tarefas.txt")
 
     File.write(caminho_arquivo, "", [:append])
 
     dados =
       File.read!(caminho_arquivo)
-      |> analisar()
-      |> processar()
+      |> decodificar()
+      |> processar(comandos)
       |> codificar()
 
     File.write(caminho_arquivo, dados)
   end
 
-  def analisar(string) do
+  def decodificar(string) do
     string
     |> String.split("\n")
     |> Enum.filter(fn string -> "" != String.trim(string) end)
@@ -21,7 +23,26 @@ defmodule Tarefas.CLI do
     |> Enum.map(fn [descricao, estado] -> {descricao, estado} end)
   end
 
-  def processar(tarefas) do
+  def processar(tarefas, []) do
+    tarefas
+    |> Enum.reject(&completada?/1)
+    |> Enum.each(&imprimir/1)
+
+    tarefas
+  end
+
+  def processar(tarefas, ["todas"]) do
+    Enum.each(tarefas, &imprimir/1)
+
+    tarefas
+  end
+
+  defp completada?({_descricao, estado}) do
+    estado == "completada"
+  end
+
+  defp imprimir({descricao, _estado}) do
+    IO.puts(descricao)
   end
 
   def codificar(tarefas) do
