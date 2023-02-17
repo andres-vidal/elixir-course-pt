@@ -32,9 +32,21 @@ defmodule Tarefas.CLI do
   end
 
   def processar(tarefas, ["todas"]) do
-    Enum.each(tarefas, &imprimir/1)
+    processar(tarefas, [])
+
+    IO.puts("")
+    IO.puts("-- Tarefas Completadas --")
 
     tarefas
+    |> Enum.filter(&completada?/1)
+    |> Enum.each(&imprimir/1)
+
+    tarefas
+  end
+
+  def processar(tarefas, [descricao_da_nova_tarefa]) do
+    nova_tarefa = {descricao_da_nova_tarefa, "sem_completar"}
+    tarefas ++ [nova_tarefa]
   end
 
   defp completada?({_descricao, estado}) do
