@@ -44,8 +44,14 @@ defmodule Tarefas do
 
   Retorna uma lista de structs do tipo Tarefa com os conteúdos da string
   """
-  def decodificar(_) do
-  end
+	def decodificar(str) do
+		str
+		|> String.split("\n", trim: true)
+		|> Enum.map(fn linha ->
+			[id, descricao, estado] = String.split(linha, ",", parts: 2)
+			%{id: id, descricao: descricao, estado: estado}
+		end)
+	end
 
   @doc """
   Recebe uma lista de structs do tipo Tarefa
