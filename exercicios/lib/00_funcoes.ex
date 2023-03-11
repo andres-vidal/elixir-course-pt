@@ -17,9 +17,12 @@ defmodule Funcoes do
 
     iex> Funcoes.is_zero(-1)
     false
+
   """
-  def is_zero do
+  def is_zero(n) when is_number(n) do
+    n == 0
   end
+  # def is_zero(n) do "nao e numero" end
 
   @doc """
   Recebe um valor que poder ser uma lista, um numero, um mapa ou uma tupla
@@ -42,7 +45,17 @@ defmodule Funcoes do
     iex> Funcoes.type({})
     "tupla"
   """
-  def type do
+  def type([]) do
+    "lista"
+  end
+  def type(n) when is_number(n) do
+    "numero"
+  end
+  def type(%{}) do
+    "mapa"
+  end
+  def type({}) do
+    "tupla"
   end
 
   @doc """
@@ -66,8 +79,8 @@ defmodule Funcoes do
     iex> Funcoes.max(-2, -1)
     -1
   """
-  def max do
-  end
+  def max(n1, n2) when n1 > n2, do: n1  
+  def max(n1, n2), do: n2 
 
   @doc """
   Recebe uma função e um número
@@ -84,6 +97,7 @@ defmodule Funcoes do
     iex> Funcoes.call(fn n -> n - 1 end, 1)
     0
   """
-  def call do
+  def call(f, n) do
+    f.(n)
   end
 end
