@@ -130,15 +130,7 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a nova ordem
   """
-  # def mover(tarefas, origem, destino) when origem > Kernel.length(tarefas)-1 and origem > destino do
-  #   tarefa = Enum.at(tarefas, Kernel.length(tarefas) - 1)
-  #   tarefas
-  #   |> List.delete_at(origem)
-  #   |> List.insert_at(destino, tarefa)
-  # end
-  # def mover([head | tail], origem, destino) when destino < 0 do
-  #   # [head] ++ tail
-  # end
+
   def mover(tarefas, origem, destino) when destino === origem do
     tarefas
   end

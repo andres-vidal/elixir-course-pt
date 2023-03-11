@@ -79,8 +79,8 @@ defmodule Funcoes do
     iex> Funcoes.max(-2, -1)
     -1
   """
-  def max(n1, n2) when n1 > n2, do: n1  
-  def max(n1, n2), do: n2 
+  def max(n1, n2) when n1 > n2, do: n1
+  def max(n1, n2), do: n2
 
   @doc """
   Recebe uma função e um número

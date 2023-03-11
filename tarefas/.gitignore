@@ -24,3 +24,6 @@ tarefas-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+tarefas
+tarefas.txt
