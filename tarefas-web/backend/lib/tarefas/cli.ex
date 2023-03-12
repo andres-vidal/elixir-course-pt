@@ -28,7 +28,47 @@ defmodule Tarefas.CLI do
   Retorna o resultado do processamento
   """
 
-  def processar(tarefas, _comandos) when is_list(tarefas) do
-    IO.puts("Comando não implementado.")
+  def processar(tarefas, []) when is_list(tarefas) do
+    tarefas
+      |> Tarefas.filtrar(completadas?: false)
+      |> Tarefas.imprimir()
   end
+
+
+  def processar(tarefas, ["todas"]) when is_list(tarefas) do
+    processar(tarefas, [])
+    IO.puts("")
+    IO.puts("-- Tarefas Completadas --")
+
+    tarefas
+      |> Tarefas.filtrar(completadas?: true)
+      |> Tarefas.imprimir()
+  end
+
+  def processar(tarefas, ["remover", posicao]) when is_list(tarefas) do
+    Tarefas.remover(tarefas, String.to_integer(posicao))
+  end
+
+  def processar(tarefas, ["completar", posicao]) when is_list(tarefas) do
+    Tarefas.completar(tarefas, String.to_integer(posicao))
+  end
+
+  def processar(tarefas, ["reiniciar", posicao]) when is_list(tarefas) do
+    Tarefas.reiniciar(tarefas, String.to_integer(posicao))
+  end
+
+  def processar(tarefas, [tarefa_desc]) when is_list(tarefas) do
+    nova_tarefa = %Tarefa{id: @uuid.(), descricao: tarefa_desc}
+    tarefas ++ [nova_tarefa]
+  end
+
+  def processar(tarefas, [tarefa_desc, posicao]) when is_list(tarefas) do
+    nova_tarefa = %Tarefa{id: @uuid.(), descricao: tarefa_desc}
+    Tarefas.inserir(tarefas, nova_tarefa, String.to_integer(posicao))
+  end
+
+  def processar(tarefas, ["mover", origem, destino]) when is_list(tarefas) do
+    Tarefas.mover(tarefas, String.to_integer(origem), String.to_integer(destino))
+  end
+
 end

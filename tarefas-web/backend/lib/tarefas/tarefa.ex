@@ -14,7 +14,7 @@ defmodule Tarefas.Tarefa do
 
 	Retorna uma struct do tipo Tarefa com os mesmo dados e estado "completada"
 	"""
-	def completar(%Tarefa{id: id, descricao: descricao} = tarefa) do
+	def completar(%Tarefa{id: id, descricao: descricao}) do
 		%Tarefa{id: id, descricao: descricao, estado: "completada"}
 	end
 
@@ -23,7 +23,7 @@ defmodule Tarefas.Tarefa do
 
 	Retorna uma struct do tipo Tarefa com os mesmo dados e estado "sem_completar"
 	"""
-	def reiniciar(%Tarefa{id: id, descricao: descricao} = tarefa) do
+	def reiniciar(%Tarefa{id: id, descricao: descricao}) do
 		%Tarefa{id: id, descricao: descricao, estado: "sem_completar"}
 	end
 
@@ -41,7 +41,7 @@ defmodule Tarefas.Tarefa do
 	Codifica a struct numa string com o formato "id,descricao,estado"
 	"""
 	def codificar(%Tarefa{id: id, descricao: descricao, estado: estado}) do
-		[id, descricao, estado] |> Enum.join(",")
+		Enum.join([id, descricao, estado], ",")
 	end
 
 	@doc """
