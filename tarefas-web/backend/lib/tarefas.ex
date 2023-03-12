@@ -44,7 +44,10 @@ defmodule Tarefas do
 
   Retorna uma lista de structs do tipo Tarefa com os conteúdos da string
   """
-  def decodificar(_) do
+  def decodificar(str) do
+    str
+    |> String.split("\n", trim: true)
+    |> Enum.map(&Tarefa.decodificar/1)
   end
 
   @doc """
@@ -55,7 +58,11 @@ defmodule Tarefas do
   Retorna a string codificada
   """
 
-  def codificar(_) do
+  def codificar(tarefas) when is_list(tarefas) do
+    tarefas = tarefas
+    |> Enum.map(&Tarefa.codificar/1)
+    |> Enum.join("\n")
+   tarefas <> "\n"
   end
 
   @doc """
@@ -64,7 +71,13 @@ defmodule Tarefas do
   Se completadas? for verdadeiro, retorna os elementos com o estado "completada"
   Se completadas? for falso, retorna os elementos com o estado "sem_completar"
   """
-  def filtrar(_, _) do
+
+  def filtrar(tarefas, completadas?: true) do
+    Enum.filter(tarefas, &Tarefa.completada?(&1) == true)
+  end
+
+  def filtrar(tarefas, completadas?: false) do
+    Enum.filter(tarefas, &Tarefa.completada?(&1) == false)
   end
 
   @doc """
@@ -72,7 +85,10 @@ defmodule Tarefas do
 
   Retorna a lista ordenada, com as tarefas completadas no final da lista
   """
-  def ordenar(_) do
+  def ordenar(tarefas) do
+    completadas = Enum.filter(tarefas, &Tarefa.completada?/1)
+    sem_completar = Enum.reject(tarefas, &Tarefa.completada?/1)
+    sem_completar ++ completadas
   end
 
   @doc """
@@ -80,7 +96,8 @@ defmodule Tarefas do
 
   Imprime os elementos da lista no console
   """
-  def imprimir(_) do
+  def imprimir(tarefas) do
+    Enum.each(tarefas, &Tarefa.imprimir/1)
   end
 
   @doc """
@@ -88,7 +105,8 @@ defmodule Tarefas do
 
   Insere a struct no final da lista
   """
-  def inserir(_, _) do
+  def inserir(tarefas, tarefa) do
+    [tarefas, tarefa] |> List.flatten()
   end
 
   @doc """
@@ -96,7 +114,9 @@ defmodule Tarefas do
 
   Insere a struct na posição indicada da lista
   """
-  def inserir(_, _, _) do
+  def inserir(tarefas, tarefa, posicao) do
+    posicao = max(posicao, 0) # se posicao < 0, posicao = 0
+    List.insert_at(tarefas, posicao, tarefa)
   end
 
   @doc """
@@ -106,7 +126,21 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a nova ordem
   """
-  def mover(_, _, _) do
+  def mover(tarefas, origem, destino) when origem > destino and origem > length(tarefas) do
+    mover(tarefas, length(tarefas) - 1, destino)
+  end
+
+  def mover(tarefas, origem, destino) when origem == destino and
+    (length(tarefas) < destino or length(tarefas) < origem) do tarefas end
+
+  def mover(tarefas, origem, destino) when origem == destino and
+    (destino < 0 or origem < 0) do tarefas end
+
+  def mover(tarefas, origem, destino) do
+    origem = max(origem, 0)
+    tarefa = Enum.at(tarefas, origem)
+    temp_tarefas = List.delete_at(tarefas, origem)
+    inserir(temp_tarefas, tarefa, destino)
   end
 
   @doc """
@@ -116,7 +150,10 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas sem a tarefa removida
   """
-  def remover(_, _) do
+  def remover(tarefas, posicao) do
+    posicao = max(posicao, 0)
+    posicao = min(posicao, length(tarefas) -1)
+    List.delete_at(tarefas, posicao)
   end
 
   @doc """
@@ -126,7 +163,17 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a tarefa completada
   """
-  def completar(_, _) do
+  def completar(tarefas, posicao) do
+    posicao = posicao
+      |> max(0)
+      |> min(length(tarefas) -1)
+
+    completar = Enum.at(tarefas, posicao)
+    completada = Tarefa.completar(completar)
+
+    tarefas
+      |> remover(posicao)
+      |> inserir(completada, posicao)
   end
 
   @doc """
@@ -136,6 +183,14 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a tarefa sem completar
   """
-  def reiniciar(_, _) do
+  def reiniciar(tarefas, posicao) do
+    posicao = max(posicao, 0)
+    posicao = min(posicao, length(tarefas) -1)
+
+    reiniciar = Enum.at(tarefas, posicao)
+    reiniciar = Tarefa.reiniciar(reiniciar)
+
+    tarefas = remover(tarefas, posicao)
+    inserir(tarefas, reiniciar, posicao)
   end
 end
