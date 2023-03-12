@@ -1,0 +1,3 @@
+t1, sem_completar
+t3, sem_completar
+t2, sem_completar

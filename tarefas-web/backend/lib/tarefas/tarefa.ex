@@ -14,7 +14,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os mesmo dados e estado "completada"
   """
-  def completar(_) do
+  def completar(%Tarefa{id: id, descricao: descricao}) do
+    %Tarefa{id: id, descricao: descricao, estado: "completada"}
   end
 
   @doc """
@@ -22,7 +23,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os mesmo dados e estado "sem_completar"
   """
-  def reiniciar(_) do
+  def reiniciar(%Tarefa{id: id, descricao: descricao}) do
+    %Tarefa{descricao: descricao, estado: "sem_completar", id: id}
   end
 
   @doc """
@@ -30,7 +32,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna verdadeiro se seu estado for "completada" ou falso se não
   """
-  def completada?(_) do
+  def completada?(%Tarefa{estado: estado}) do
+    estado === "completada"
   end
 
   @doc """
@@ -38,7 +41,8 @@ defmodule Tarefas.Tarefa do
 
   Codifica a struct numa string com o formato "id,descricao,estado"
   """
-  def codificar(_) do
+  def codificar(%Tarefa{id: id, descricao: descricao, estado: estado}) do
+    "#{id},#{descricao},#{estado}"
   end
 
   @doc """
@@ -46,7 +50,9 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os conteúdos da string
   """
-  def decodificar(_) do
+  def decodificar(string) do
+    [id, descricao,  estado] = string |> String.split(",")
+    %Tarefa{id: id, descricao: descricao, estado: estado}
   end
 
   @doc """
@@ -54,6 +60,7 @@ defmodule Tarefas.Tarefa do
 
   Imprime a struct no console
   """
-  def imprimir(_) do
+  def imprimir(%Tarefa{descricao: descricao}) do
+    IO.puts(descricao)
   end
 end

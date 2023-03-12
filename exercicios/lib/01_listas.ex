@@ -18,7 +18,8 @@ defmodule Listas do
     iex> Listas.concat([1, "a", 3], [nil])
     [1, "a", 3, nil]
   """
-  def concat do
+  def concat(a, b) do
+    a ++ b
   end
 
   @doc """
@@ -36,7 +37,8 @@ defmodule Listas do
     iex> Listas.append([1, "a", 3], nil)
     [1, "a", 3, nil]
   """
-  def append do
+  def append(list, el) when is_list(list) do
+    list ++ [el] 
   end
 
   @doc """
@@ -54,7 +56,8 @@ defmodule Listas do
     iex> Listas.prepend([1, "a", 3], nil)
     [nil, 1, "a", 3]
   """
-  def prepend do
+  def prepend(list, el) when is_list(list) do 
+    [el | list]
   end
 
   @doc """
@@ -71,8 +74,10 @@ defmodule Listas do
 
     iex> Listas.head([nil, 1, "a", 3])
     nil
+
   """
-  def head do
+  def head([head | t]) do
+    head
   end
 
   @doc """
@@ -90,7 +95,8 @@ defmodule Listas do
     iex> Listas.tail([nil, 1, "a", 3])
     [1, "a", 3]
   """
-  def tail do
+  def tail([h | tail]) do
+    tail
   end
 
   @doc """
@@ -104,7 +110,10 @@ defmodule Listas do
     iex> Listas.sum([1, 2, 3, 4], 5)
     [6, 7, 8, 9]
   """
-  def sum do
+
+  def sum([], add) do [] end
+  def sum([head | tail], add) do
+    [head + add] ++ sum(tail, add)
   end
 
   @doc """
@@ -121,7 +130,13 @@ defmodule Listas do
     iex> Listas.remove([nil, nil, nil, 4, 2, 3], nil)
     [4, 2, 3]
   """
-  def remove do
+
+  def remove([], n) do [] end
+  def remove([a | b], n) when a === n do
+    remove(b, n)
+  end
+  def remove([a | b], n) do
+    [a] ++ remove(b, n)
   end
 
   @doc """
@@ -141,7 +156,9 @@ defmodule Listas do
     iex> Listas.count([nil, nil, nil, 4, 2, 3])
     6
   """
-  def count do
+  def count([]) do 0 end
+  def count([head | tail]) do
+    1 + count(tail)
   end
 
   @doc """
@@ -161,7 +178,12 @@ defmodule Listas do
     iex> Listas.count_not_null([nil, nil, nil, 4, 2, 3])
     3
   """
-  def count_not_null do
+  def count_not_null([]) do 0 end
+  def count_not_null([head | tail]) when head===nil do 
+    count_not_null(tail)
+  end
+  def count_not_null([head | tail]) do 
+    1 + count_not_null(tail) 
   end
 
   @doc """
@@ -187,7 +209,12 @@ defmodule Listas do
     iex> Listas.includes?([1, 2, 3, 4, 2, 3], 0)
     false
   """
-  def includes? do
+  def includes?([], n) do false end
+  def includes?([head | tail], n) when head === n do 
+    true
+  end
+  def includes?([head | tail], n) do 
+    includes?(tail, n)
   end
 
   @doc """
@@ -207,7 +234,9 @@ defmodule Listas do
     iex> Listas.map([nil, nil, nil, 4, 2, 3], fn n -> case n do nil -> 0; _ -> n end end)
     [0, 0, 0, 4, 2, 3]
   """
-  def map do
+  def map([], f) do [] end
+  def map([head | tail], f) do
+    [f.(head)] ++ map(tail, f)  
   end
 
   @doc """
@@ -227,7 +256,13 @@ defmodule Listas do
     iex> Listas.filter([nil, nil, nil, 4, 2, 3], fn n -> not is_nil(n) end)
     [4, 2, 3]
   """
-  def filter do
+  def filter([], f) do [] end
+  def filter([head | tail], f) do
+    if f.(head) do 
+      [head] ++ filter(tail, f)
+    else 
+      filter(tail, f)
+    end
   end
 
   @doc """
@@ -247,7 +282,9 @@ defmodule Listas do
   ["a", "b", "d", "c", "f", "g", "j", "l", "z"]
 
   """
-  def flatten do
+  def flatten([]) do [] end
+  def flatten([head | tail]) when is_list(head) do
+    head ++ flatten(tail)
   end
 
   @doc """
@@ -268,7 +305,22 @@ defmodule Listas do
     [nil, 4, 2, 3]
   """
 
-  def unique do
+  # def unique([]) do [] end
+  def unique(list) do
+    unique_helper(list, [])
+  end
+
+  def unique_helper([], acc) do acc end
+  def unique_helper([head | tail], acc) do
+    unique_helper(tail, adicionar_se_nao_existe(head, acc))
+  end
+
+  def adicionar_se_nao_existe(elemento, lista) do 
+    if includes?(lista, elemento) do 
+      lista
+    else
+      lista ++ [elemento]
+    end
   end
 
   @doc """
@@ -288,9 +340,17 @@ defmodule Listas do
     iex> Listas.reduce([2, 2, 1, 1, 1, 1], 0, fn acc, n -> acc + n end)
     8
 
+    iex> Listas.reduce([2, 2, 1, 1, 1, 1], [], fn acc, n -> acc ++ [[n]] end)
+    [[2], [2], [1], [1], [1], [1]]
+
+    iex> Listas.reduce([2, 3, 5, 7, 11], 1, fn acc, n -> acc * n end)
+    2310
+
     iex> Listas.reduce([[1, 2, 3], [4, 5, 6], [7, 8, 9]], [], fn acc, l -> acc ++ l end)
     [1, 2, 3, 4, 5, 6, 7, 8, 9]
   """
-  def reduce do
+  def reduce([], ini, _f) do ini end
+  def reduce([head | tail], ini, f) do
+    reduce(tail, f.(ini, head), f)
   end
 end

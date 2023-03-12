@@ -1,0 +1,1085 @@
+Compiling 1 file (.ex)
+..
+
+  1) test inserir/2 numa lista não vazia, insere a Tarefa no final da lista (Tarefas.Test)
+     test/tarefas_test.exs:151
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:161: (test)
+
+
+
+  2) test ler/0 quando o arquivo de tarefas existe e é vazio, retorna uma lista vazia (Tarefas.Test)
+     test/tarefas_test.exs:762
+     match (=) failed
+     code:  assert [] = Tarefas.ler()
+     left:  []
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:765: (test)
+
+
+
+  3) test mover/3 quando origem == destino com posição negativa (Tarefas.Test)
+     test/tarefas_test.exs:489
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.mover(tarefas, -1, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:497: (test)
+
+
+
+  4) test ordernar/1 quando as tarefas completadas estão no final, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:96
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.ordenar(tarefas)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "completada"},
+              %Tarefas.Tarefa{id: "e", descricao: "Tarefa 5", estado: "completada"},
+              %Tarefas.Tarefa{id: "f", descricao: "Tarefa 6", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:106: (test)
+
+
+
+  5) test completar/2 marca como completada a primeira tarefa quando a posição passada é negativa (Tarefas.Test)
+     test/tarefas_test.exs:609
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.completar(entrada, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:622: (test)
+
+
+
+  6) test mover/3 quando origem == destino no começo da lista, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:500
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.mover(tarefas, 0, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:508: (test)
+
+
+
+  7) test mover/3 quando origem > destino move uma tarefa do meio exatamente ao começo da lista (Tarefas.Test)
+     test/tarefas_test.exs:433
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 2, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:448: (test)
+
+
+
+  8) test mover/3 quando origem == destino no meio da lista, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:511
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.mover(tarefas, 2, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:519: (test)
+
+
+
+  9) test ordernar/1 quando todas as tarefas estão completadas, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:86
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.ordenar(tarefas)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:93: (test)
+
+
+
+ 10) test ordernar/1 quando as tarefas completadas não estão no final, retorna a lista com as tarefas completadas no final e a mesma ordem relativa (Tarefas.Test)
+     test/tarefas_test.exs:109
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.ordenar(entrada)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "e", descricao: "Tarefa 5", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "completada"},
+              %Tarefas.Tarefa{id: "f", descricao: "Tarefa 6", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:128: (test)
+
+
+
+ 11) test imprimir/1 imprime as descrições das tarefas em linhas separadas (Tarefas.Test)
+     test/tarefas_test.exs:133
+     Assertion with == failed
+     code:  assert saida_esperada == capture_io(fn -> Tarefas.imprimir(@tarefas_structs) end)
+     left:  "Tarefa 1\nTarefa 2\nTarefa 3\n"
+     right: ""
+     stacktrace:
+       test/tarefas_test.exs:140: (test)
+
+
+
+ 12) test inserir/3 insere uma Tarefa no começo da lista quando a posição é 0 (Tarefas.Test)
+     test/tarefas_test.exs:166
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:176: (test)
+
+
+
+ 13) test reiniciar/2 marca como completada a tarefa do final quando a posição passada é exata (Tarefas.Test)
+     test/tarefas_test.exs:723
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.reiniciar(entrada, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:736: (test)
+
+
+
+ 14) test decodificar/1 converte um string em uma lista de tarefas (Tarefas.Test)
+     test/tarefas_test.exs:30
+     Assertion with == failed
+     code:  assert @tarefas_structs == Tarefas.decodificar(@tarefas_string)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:31: (test)
+
+
+
+ 15) test inserir/3 insere uma Tarefa no começo da lista quando a posição é negativa (Tarefas.Test)
+     test/tarefas_test.exs:179
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:189: (test)
+
+
+
+ 16) test mover/3 quando origem == destino além do final da lista, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:533
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.mover(tarefas, 10, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:541: (test)
+
+
+
+ 17) test mover/3 quando origem < destino move a primeira tarefa ao meio da lista (Tarefas.Test)
+     test/tarefas_test.exs:287
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 0, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:302: (test)
+
+
+
+ 18) test inserir/3 insere uma Tarefa no meio da lista (Tarefas.Test)
+     test/tarefas_test.exs:192
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:202: (test)
+
+
+
+ 19) test reiniciar/2 marca como completada a primeira tarefa quando a posição passada é 0 (Tarefas.Test)
+     test/tarefas_test.exs:675
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.reiniciar(entrada, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:688: (test)
+
+
+
+ 20) test filtrar/1 quando completadas? for verdadeiro, retorna únicamente as tarefas completadas (Tarefas.Test)
+     test/tarefas_test.exs:42
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.filtrar(entrada, completadas?: true)
+     left:  [%Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"}, %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "completada"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:55: (test)
+
+
+
+ 21) test mover/3 quando origem > destino move a ultima tarefa ao meio da lista (Tarefas.Test)
+     test/tarefas_test.exs:415
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 3, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:430: (test)
+
+
+
+ 22) test mover/3 quando origem < destino move a primeira tarefa ao final da lista quando destino é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:269
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 0, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:284: (test)
+
+
+
+ 23) test mover/3 quando origem > destino move a ultima tarefa ao começo da lista quando destino é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:397
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 3, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:412: (test)
+
+
+
+ 24) test mover/3 quando origem < destino move uma tarefa do meio ao final da lista quando destino é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:323
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 1, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:338: (test)
+
+
+
+ 25) test completar/2 marca como completada a tarefa do final quando a posição passada é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:657
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.completar(entrada, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:670: (test)
+
+
+
+ 26) test codificar/1 converte uma lista de tarefas em string (Tarefas.Test)
+     test/tarefas_test.exs:36
+     Assertion with == failed
+     code:  assert @tarefas_string == Tarefas.codificar(@tarefas_structs)
+     left:  "a,Tarefa 1,sem_completar\nb,Tarefa 2,sem_completar\nc,Tarefa 3,completada\n"
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:37: (test)
+
+
+
+ 27) test reiniciar/2 marca como completada a tarefa do final quando a posição passada é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:739
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.reiniciar(entrada, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:752: (test)
+
+
+
+ 28) test mover/3 quando origem == destino no final da lista, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:522
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.mover(tarefas, 3, 3)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:530: (test)
+
+
+
+ 29) test salvar/1 quando o arquivo de tarefas existe, salva a lista de tarefas sobreescrevendo os valores existentes (Tarefas.Test)
+     test/tarefas_test.exs:782
+     Assertion with == failed
+     code:  assert {:ok, @tarefas_string} == File.read(Tarefas.caminho_arquivo())
+     left:  {:ok, "a,Tarefa 1,sem_completar\nb,Tarefa 2,sem_completar\nc,Tarefa 3,completada\n"}
+     right: {:ok, "Lorem ipsum dolor sit amet"}
+     stacktrace:
+       test/tarefas_test.exs:787: (test)
+
+
+
+ 30) test remover/2 remove a primeira tarefa quando a posição é 0 (Tarefas.Test)
+     test/tarefas_test.exs:546
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.remover(@tarefas_structs, 0)
+     left:  [%Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}, %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:552: (test)
+
+
+
+ 31) test filtrar/1 quando completadas? for falso, retorna únicamente as tarefas completadas (Tarefas.Test)
+     test/tarefas_test.exs:58
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.filtrar(entrada, completadas?: false)
+     left:  [%Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}, %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:71: (test)
+
+
+
+ 32) test completar/2 marca como completada a tarefa do final quando a posição passada é exata (Tarefas.Test)
+     test/tarefas_test.exs:641
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.completar(entrada, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:654: (test)
+
+
+
+ 33) test mover/3 quando origem < destino move a primeira tarefa exatamente ao final da lista (Tarefas.Test)
+     test/tarefas_test.exs:251
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 0, 3)
+     left:  [
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:266: (test)
+
+
+
+ 34) test mover/3 quando origem > destino move uma tarefa do meio ao meio da lista (Tarefas.Test)
+     test/tarefas_test.exs:469
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 2, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:484: (test)
+
+
+
+ 35) test remover/2 remove a tarefa do meio (Tarefas.Test)
+     test/tarefas_test.exs:564
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.remover(@tarefas_structs, 1)
+     left:  [%Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}, %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:570: (test)
+
+
+
+ 36) test salvar/1 salva as tarefas completadas no final da lista (Tarefas.Test)
+     test/tarefas_test.exs:790
+     Assertion with == failed
+     code:  assert {:ok, saida_esperada} == File.read(Tarefas.caminho_arquivo())
+     left:  {:ok, "a,Tarefa 1,sem_completar\nb,Tarefa 2,sem_completar\nc,Tarefa 3,completada\n"}
+     right: {:ok, "Lorem ipsum dolor sit amet"}
+     stacktrace:
+       test/tarefas_test.exs:807: (test)
+
+
+
+ 37) test inserir/3 insere uma Tarefa exatamente no final da lista (Tarefas.Test)
+     test/tarefas_test.exs:205
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa, 3)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:215: (test)
+
+
+
+ 38) test mover/3 quando origem > destino move a ultima tarefa quando o origem está além do tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:361
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 10, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:376: (test)
+
+
+
+ 39) test inserir/2 numa lista vazia, insere a Tarefa (Tarefas.Test)
+     test/tarefas_test.exs:145
+     Assertion with == failed
+     code:  assert [nova_tarefa] == Tarefas.inserir([], nova_tarefa)
+     left:  [%Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:148: (test)
+
+
+
+ 40) test remover/2 remove a primeira tarefa quando a posição é negativa (Tarefas.Test)
+     test/tarefas_test.exs:555
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.remover(@tarefas_structs, -1)
+     left:  [%Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}, %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:561: (test)
+
+
+
+ 41) test completar/2 marca como completada a tarefa do meio (Tarefas.Test)
+     test/tarefas_test.exs:625
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.completar(entrada, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:638: (test)
+
+
+
+ 42) test salvar/1 quando o arquivo de tarefas não existe, o cria e salva a lista de tarefas (Tarefas.Test)
+     test/tarefas_test.exs:776
+     Assertion with == failed
+     code:  assert {:ok, @tarefas_string} == File.read(Tarefas.caminho_arquivo())
+     left:  {:ok, "a,Tarefa 1,sem_completar\nb,Tarefa 2,sem_completar\nc,Tarefa 3,completada\n"}
+     right: {:error, :enoent}
+     stacktrace:
+       test/tarefas_test.exs:779: (test)
+
+
+
+ 43) test reiniciar/2 marca como completada a primeira tarefa quando a posição passada é negativa (Tarefas.Test)
+     test/tarefas_test.exs:691
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.reiniciar(entrada, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:704: (test)
+
+
+
+ 44) test inserir/3 insere uma Tarefa exatamente no final da lista quando uma posição do que o tamanho da lista é passado (Tarefas.Test)
+     test/tarefas_test.exs:218
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.inserir(@tarefas_structs, nova_tarefa, 10)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:228: (test)
+
+
+
+ 45) test completar/2 marca como completada a primeira tarefa quando a posição passada é 0 (Tarefas.Test)
+     test/tarefas_test.exs:593
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.completar(entrada, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:606: (test)
+
+
+
+ 46) test mover/3 quando origem < destino move uma tarefa do meio exatamente ao final da lista (Tarefas.Test)
+     test/tarefas_test.exs:305
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 1, 3)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:320: (test)
+
+
+
+ 47) test mover/3 quando origem > destino move a ultima tarefa exatamente ao começo da lista (Tarefas.Test)
+     test/tarefas_test.exs:379
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 3, 0)
+     left:  [
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:394: (test)
+
+
+
+ 48) test reiniciar/2 marca como completada a tarefa do meio (Tarefas.Test)
+     test/tarefas_test.exs:707
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.reiniciar(entrada, 1)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:720: (test)
+
+Comando não implementado.
+
+
+ 49) test remover/2 remove a última tarefa quando a posição passada é maior que o tamanho da lista (Tarefas.Test)
+     test/tarefas_test.exs:582
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.remover(@tarefas_structs, 10)
+     left:  [%Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}, %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:588: (test)
+
+Comando não implementado.
+Comando não implementado.
+
+
+ 50) test remover/2 remove a última tarefa quando a posição exata é passada (Tarefas.Test)
+     test/tarefas_test.exs:573
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.remover(@tarefas_structs, 2)
+     left:  [%Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"}, %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"}]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:579: (test)
+
+Comando não implementado.
+
+
+ 51) test ler/0 quando o arquivo de tarefas não existe, o cria e retorna uma lista vazia (Tarefas.Test)
+     test/tarefas_test.exs:757
+     match (=) failed
+     code:  assert [] = Tarefas.ler()
+     left:  []
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:758: (test)
+
+Comando não implementado.
+
+
+ 52) test ordernar/1 quando todas as tarefas estão sem completar, retorna a mesma lista (Tarefas.Test)
+     test/tarefas_test.exs:76
+     Assertion with == failed
+     code:  assert tarefas == Tarefas.ordenar(tarefas)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:83: (test)
+
+Comando não implementado.
+Comando não implementado.
+
+
+ 53) test mover/3 quando origem < destino move a primeira tarefa quando origem é negativo (Tarefas.Test)
+     test/tarefas_test.exs:233
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, -1, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:248: (test)
+
+
+
+ 54) test ler/0 quando o arquivo de tarefas existe e não é vazio, retorna uma lista de tarefas com os conteúdos do arquivo (Tarefas.Test)
+     test/tarefas_test.exs:768
+     match (=) failed
+     code:  assert @tarefas_structs = Tarefas.ler()
+     left:  [
+              %{__struct__: Tarefas.Tarefa, descricao: "Tarefa 1", estado: "sem_completar", id: "a"},
+              %{__struct__: Tarefas.Tarefa, descricao: "Tarefa 2", estado: "sem_completar", id: "b"},
+              %{__struct__: Tarefas.Tarefa, descricao: "Tarefa 3", estado: "completada", id: "c"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:771: (test)
+
+
+
+ 55) test mover/3 quando origem > destino move uma tarefa do meio ao começo da lista quando destino é negativo (Tarefas.Test)
+     test/tarefas_test.exs:451
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 2, -1)
+     left:  [
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:466: (test)
+
+
+
+ 56) test mover/3 quando origem < destino move uma tarefa do meio ao meio da lista (Tarefas.Test)
+     test/tarefas_test.exs:341
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.mover(entrada, 1, 2)
+     left:  [
+              %Tarefas.Tarefa{id: "a", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "c", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "b", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "d", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: nil
+     stacktrace:
+       test/tarefas_test.exs:356: (test)
+
+
+
+ 57) test POST /tarefas/completadas/:posicao marca a tarefa da posição fornecida como completada (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:152
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/3 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :completar, 1)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.501.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :completar, 1)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:167: (test)
+
+
+
+ 58) test DELETE /tarefas/:posicao remove a tarefa da posição fornecida da lista de tarefas (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:129
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/3 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :remover, 1)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.505.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :remover, 1)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:143: (test)
+
+
+
+ 59) test DELETE /tarefas/completadas/:posicao marca a tarefa da posição fornecida como sem completar (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:176
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/3 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :reiniciar, 2)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.509.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :reiniciar, 2)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:191: (test)
+
+
+
+ 60) test GET /tarefas quando a lista de tarefas é vazia, retorna uma lista vazia (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:14
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/2 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :listar)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.513.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :listar)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:15: (test)
+
+
+
+ 61) test POST /tarefas quando a lista de tarefas é vazia (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:46
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/2 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :inserir)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.516.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :inserir)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:59: (test)
+
+
+
+ 62) test GET /tarefas quando a lista de tarefas não é vazia, retorna a lista de tarefas (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:22
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/2 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :listar)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.519.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :listar)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:37: (test)
+
+
+
+ 63) test POST /tarefas quando a lista de tarefas não é vazia (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:70
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/2 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :inserir)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.523.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :inserir)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:92: (test)
+
+
+
+ 64) test POST /tarefas/:origem/mover-a/:destino move a tarefa da posição origem à posição destino (TarefasWeb.ControladorTarefasTest)
+     test/tarefas_web/controllers/controlador_tarefas_test.exs:105
+     ** (UndefinedFunctionError) function TarefasWeb.Router.Helpers.controlador_tarefas_path/4 is undefined or private
+     code: path = Routes.controlador_tarefas_path(conn, :mover, 0, 1)
+     stacktrace:
+       (tarefas 0.1.0) TarefasWeb.Router.Helpers.controlador_tarefas_path(%Plug.Conn{adapter: {Plug.Adapters.Test.Conn, :...}, assigns: %{}, body_params: %Plug.Conn.Unfetched{aspect: :body_params}, cookies: %Plug.Conn.Unfetched{aspect: :cookies}, halted: false, host: "www.example.com", method: "GET", owner: #PID<0.527.0>, params: %Plug.Conn.Unfetched{aspect: :params}, path_info: [], path_params: %{}, port: 80, private: %{phoenix_recycled: true, plug_skip_csrf_protection: true}, query_params: %Plug.Conn.Unfetched{aspect: :query_params}, query_string: "", remote_ip: {127, 0, 0, 1}, req_cookies: %Plug.Conn.Unfetched{aspect: :cookies}, req_headers: [], request_path: "/", resp_body: nil, resp_cookies: %{}, resp_headers: [{"cache-control", "max-age=0, private, must-revalidate"}], scheme: :http, script_name: [], secret_key_base: nil, state: :unset, status: nil}, :mover, 0, 1)
+       test/tarefas_web/controllers/controlador_tarefas_test.exs:120: (test)
+
+
+
+ 65) test processar/2 quando o segundo argumento é ["remover", posicao], remove a tarefa na posição fornecida da lista (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:88
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, ["remover", "0"])
+     left:  [%Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"}, %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"}]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:94: (test)
+
+
+
+ 66) test processar/2 quando o segundo argumento é ["mover", origem, destino], move a tarefa da posição origem à posição destino (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:78
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, ["mover", "0", "1"])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:85: (test)
+
+
+
+ 67) test processar/2 quando o segundo argumento é ["completar", posicao], marca a tarefa na posição fornecida como completada (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:97
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, ["completar", "1"])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "completada"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:104: (test)
+
+
+
+ 68) test processar/2 quando o segundo argumento é ["reiniciar", posicao], marca a tarefa na posição fornecida como completada (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:107
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, ["reiniciar", "2"])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "sem_completar"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:114: (test)
+
+
+
+ 69) test processar/2 quando o segundo argumento é vazio, imprime as tarefas fornecidas que foram completadas (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:18
+     Assertion with == failed
+     code:  assert saida_esperada == capture_io(fn -> Tarefas.CLI.processar(@entrada, []) end)
+     left:  "Tarefa 1\nTarefa 2\n"
+     right: "Comando não implementado.\n"
+     stacktrace:
+       test/tarefas/cli_test.exs:24: (test)
+
+
+
+ 70) test processar/2 quando o segundo argumento é um string qualquer, adiciona uma tarefa à lista de tarefas (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:39
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, [nova_tarefa.descricao])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:49: (test)
+
+
+
+ 71) test processar/2 quando o segundo argumento é ["todas"], imprime as tarefas fornecidas (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:27
+     Assertion with == failed
+     code:  assert saida_esperada == capture_io(fn -> Tarefas.CLI.processar(@entrada, ["todas"]) end)
+     left:  "Tarefa 1\nTarefa 2\n\n-- Tarefas Completadas --\nTarefa 3\n"
+     right: "Comando não implementado.\n"
+     stacktrace:
+       test/tarefas/cli_test.exs:36: (test)
+
+
+
+ 72) test processar/2 quando o segundo argumento é [descricao, 0], adiciona uma tarefa à lista de tarefas no começo da lista (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:52
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, [nova_tarefa.descricao, "0"])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:62: (test)
+
+
+
+ 73) test processar/2 quando o segundo argumento é [descricao, posicao], adiciona uma tarefa à lista de tarefas na posição indicada (Tarefas.CLITest)
+     test/tarefas/cli_test.exs:65
+     Assertion with == failed
+     code:  assert saida_esperada == Tarefas.CLI.processar(@entrada, [nova_tarefa.descricao, "2"])
+     left:  [
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 1", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 2", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 4", estado: "sem_completar"},
+              %Tarefas.Tarefa{id: "", descricao: "Tarefa 3", estado: "completada"}
+            ]
+     right: :ok
+     stacktrace:
+       test/tarefas/cli_test.exs:75: (test)
+
+
+
+ 74) test codificar/1 codifica uma tarefa sem completar como uma string no formato id,descricao,estado (TarefaTest)
+     test/tarefas/tarefa_test.exs:86
+     Assertion with == failed
+     code:  assert "def,Tarefa 2,sem_completar" == Tarefa.codificar(tarefa)
+     left:  "def,Tarefa 2,sem_completar"
+     right: nil
+     stacktrace:
+       test/tarefas/tarefa_test.exs:92: (test)
+
+
+
+ 75) test codificar/1 codifica uma tarefa completada como uma string no formato id,descricao,estado (TarefaTest)
+     test/tarefas/tarefa_test.exs:76
+     Assertion with == failed
+     code:  assert "123,Tarefa 1,completada" == Tarefa.codificar(tarefa)
+     left:  "123,Tarefa 1,completada"
+     right: nil
+     stacktrace:
+       test/tarefas/tarefa_test.exs:83: (test)
+
+
+
+ 76) test decodificar/1 decodifica uma string no formato id,descricao,estado como uma Tarefa (TarefaTest)
+     test/tarefas/tarefa_test.exs:97
+     Assertion with == failed
+     code:  assert tarefa == Tarefa.decodificar("123,Descrição,completada")
+     left:  %Tarefas.Tarefa{id: "123", descricao: "Descrição", estado: "completada"}
+     right: nil
+     stacktrace:
+       test/tarefas/tarefa_test.exs:100: (test)
+
+
+
+ 77) test imprimir/1 imprime a descrição de uma Tarefa completada no console (TarefaTest)
+     test/tarefas/tarefa_test.exs:105
+     Assertion with == failed
+     code:  assert saida_esperada == capture_io(fn -> Tarefa.imprimir(tarefa) end)
+     left:  "Tarefa 1\n"
+     right: ""
+     stacktrace:
+       test/tarefas/tarefa_test.exs:116: (test)
+
+....
+
+ 78) test imprimir/1 imprime a descrição de uma Tarefa sem completar no console (TarefaTest)
+     test/tarefas/tarefa_test.exs:119
+     Assertion with == failed
+     code:  assert saida_esperada == capture_io(fn -> Tarefa.imprimir(tarefa) end)
+     left:  "Tarefa 3\n"
+     right: ""
+     stacktrace:
+       test/tarefas/tarefa_test.exs:129: (test)
+
+.
+Finished in 0.2 seconds (0.1s async, 0.04s sync)
+85 tests, 78 failures
+
+Randomized with seed 637946
