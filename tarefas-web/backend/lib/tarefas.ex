@@ -3,6 +3,7 @@ defmodule Tarefas do
   Módulo com utilidades gerais para a manipulação de listas de tarefas e do arquivo de tarefas
   """
 
+  alias ElixirSense.Providers.Suggestion.Reducers.Struct
   alias Tarefas.Tarefa
 
   @doc """
@@ -25,6 +26,8 @@ defmodule Tarefas do
     |> decodificar()
   end
 
+  def tarefas do ler() end
+
   @doc """
   Recebe uma lista de structs do tipo Tarefa
 
@@ -44,7 +47,13 @@ defmodule Tarefas do
 
   Retorna uma lista de structs do tipo Tarefa com os conteúdos da string
   """
-  def decodificar(_) do
+  def decodificar(string) do
+    string=String.split(string,"\n")
+    string=if Enum.at(string,-1) == "" do string=List.delete_at(string,-1) else string end
+
+    #string=List.delete_at(string,-1)
+    string=Enum.map(string,fn tarefa -> Tarefas.Tarefa.decodificar(tarefa)  end)
+    string
   end
 
   @doc """
@@ -55,7 +64,9 @@ defmodule Tarefas do
   Retorna a string codificada
   """
 
-  def codificar(_) do
+  def codificar(tarefas) do
+    tarefas=Enum.map(tarefas,fn tarefa -> "#{Tarefas.Tarefa.codificar(tarefa)}\n" end)
+    List.to_string(tarefas)
   end
 
   @doc """
@@ -64,7 +75,11 @@ defmodule Tarefas do
   Se completadas? for verdadeiro, retorna os elementos com o estado "completada"
   Se completadas? for falso, retorna os elementos com o estado "sem_completar"
   """
-  def filtrar(_, _) do
+  def filtrar(tarefas,completadas?: completa?) do
+    #Tarefas.Tarefa.getEstado(tarefa)
+    tarefas=Enum.filter(tarefas,fn tarefa -> Tarefas.Tarefa.completada?(tarefa) == completa? end)
+    # tarefas
+    #Tarefas.Tarefa.completada?( Enum.at(tarefas,1))
   end
 
   @doc """
@@ -72,7 +87,10 @@ defmodule Tarefas do
 
   Retorna a lista ordenada, com as tarefas completadas no final da lista
   """
-  def ordenar(_) do
+  def ordenar(tarefas) do
+    semcompletar=filtrar(tarefas,completadas?: false)
+    completadas=filtrar(tarefas,completadas?: true)
+    resultado= semcompletar++completadas
   end
 
   @doc """
@@ -80,7 +98,8 @@ defmodule Tarefas do
 
   Imprime os elementos da lista no console
   """
-  def imprimir(_) do
+  def imprimir(tarefas) do
+    Enum.map(tarefas,fn tarefa -> IO.puts(Tarefas.Tarefa.getDescricao(tarefa)) end)
   end
 
   @doc """
@@ -88,7 +107,8 @@ defmodule Tarefas do
 
   Insere a struct no final da lista
   """
-  def inserir(_, _) do
+  def inserir(tarefas,nova) do
+    List.insert_at(tarefas,-1,nova)
   end
 
   @doc """
@@ -96,7 +116,19 @@ defmodule Tarefas do
 
   Insere a struct na posição indicada da lista
   """
-  def inserir(_, _, _) do
+  def inserir(tarefas,nova,onde)when onde<0 do
+    #onde=String.to_integer(onde)
+    List.insert_at(tarefas,0,nova)
+  end
+
+  def inserir(tarefas,nova,onde) do
+    #onde=String.to_integer(onde)
+    List.insert_at(tarefas,onde,nova)
+  end
+
+  def inserir([],nova) do
+    #onde=String.to_integer(onde)
+      [nova]
   end
 
   @doc """
@@ -106,7 +138,68 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a nova ordem
   """
-  def mover(_, _, _) do
+  def mover(tarefas,origem,destino)when origem<0 and destino<0 or destino>length(tarefas) and origem==destino do
+    tarefas
+  end
+
+  def mover(tarefas,origem,destino)when origem>length(tarefas) do
+    # origem=String.to_integer(origem)
+    # destino=String.to_integer(destino)
+    origem=-1
+    tarefa=Enum.at(tarefas,origem)
+    tarefa1=Tarefas.Tarefa.strToList(tarefa)
+    tarefa_nome=Enum.at(tarefa1,1)
+
+    tarefas=Enum.reject(tarefas, fn tarefa -> Tarefas.Tarefa.getDescricao(tarefa)==tarefa_nome  end)
+    # tarefas=Enum.reject(tarefas,fn {descri,_estado} -> descri==tarefa end)
+    # tarefaE=Enum.at(tarefaE,0)
+    tarefas=List.insert_at(tarefas,destino,tarefa)
+    # tarefas
+  end
+
+  def mover(tarefas,origem,destino)when origem<0 do
+    # origem=String.to_integer(origem)
+    # destino=String.to_integer(destino)
+    origem=0
+    tarefa=Enum.at(tarefas,origem)
+    tarefa1=Tarefas.Tarefa.strToList(tarefa)
+    tarefa_nome=Enum.at(tarefa1,1)
+
+    tarefas=Enum.reject(tarefas, fn tarefa -> Tarefas.Tarefa.getDescricao(tarefa)==tarefa_nome  end)
+    # tarefas=Enum.reject(tarefas,fn {descri,_estado} -> descri==tarefa end)
+    # tarefaE=Enum.at(tarefaE,0)
+    tarefas=List.insert_at(tarefas,destino,tarefa)
+    # tarefas
+  end
+
+  def mover(tarefas,origem,destino)when origem>destino and destino<0 do
+    # origem=String.to_integer(origem)
+    # destino=String.to_integer(destino)
+    destino=0
+    tarefa=Enum.at(tarefas,origem)
+    tarefa1=Tarefas.Tarefa.strToList(tarefa)
+    tarefa_nome=Enum.at(tarefa1,1)
+
+    tarefas=Enum.reject(tarefas, fn tarefa -> Tarefas.Tarefa.getDescricao(tarefa)==tarefa_nome  end)
+    # tarefas=Enum.reject(tarefas,fn {descri,_estado} -> descri==tarefa end)
+    # tarefaE=Enum.at(tarefaE,0)
+    tarefas=List.insert_at(tarefas,destino,tarefa)
+    # tarefas
+  end
+
+  def mover(tarefas,origem,destino) do
+    # origem=String.to_integer(origem)
+    # destino=String.to_integer(destino)
+
+    tarefa=Enum.at(tarefas,origem)
+    tarefa1=Tarefas.Tarefa.strToList(tarefa)
+    tarefa_nome=Enum.at(tarefa1,1)
+
+    tarefas=Enum.reject(tarefas, fn tarefa -> Tarefas.Tarefa.getDescricao(tarefa)==tarefa_nome  end)
+    # tarefas=Enum.reject(tarefas,fn {descri,_estado} -> descri==tarefa end)
+    # tarefaE=Enum.at(tarefaE,0)
+    tarefas=List.insert_at(tarefas,destino,tarefa)
+    # tarefas
   end
 
   @doc """
@@ -116,7 +209,17 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas sem a tarefa removida
   """
-  def remover(_, _) do
+
+  def remover(tarefas,x)when x<0 do
+    List.delete_at(tarefas,0)
+  end
+
+  def remover(tarefas,x)when x>length(tarefas) do
+    List.delete_at(tarefas,-1)
+  end
+
+  def remover(tarefas,x) do
+    List.delete_at(tarefas,x)
   end
 
   @doc """
@@ -126,7 +229,20 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a tarefa completada
   """
-  def completar(_, _) do
+  def completar(tarefas,x)when x<0 do
+    tarefa=Tarefas.Tarefa.completar(Enum.at(tarefas,0))
+    tarefas=List.replace_at(tarefas,0,tarefa)
+  end
+
+  def completar(tarefas,x)when x>length(tarefas) do
+    tarefa=Tarefas.Tarefa.completar(Enum.at(tarefas,-1))
+    tarefas=List.replace_at(tarefas,-1,tarefa)
+  end
+
+  def completar(tarefas,x) do
+    tarefa=Tarefas.Tarefa.completar(Enum.at(tarefas,x))
+    tarefas=List.replace_at(tarefas,x,tarefa)
+    IO.inspect(tarefas)
   end
 
   @doc """
@@ -136,6 +252,19 @@ defmodule Tarefas do
 
   Retorna a lista de tarefas com a tarefa sem completar
   """
-  def reiniciar(_, _) do
+
+  def reiniciar(tarefas,x)when x<0 do
+    tarefa=Tarefas.Tarefa.reiniciar(Enum.at(tarefas,0))
+    tarefas=List.replace_at(tarefas,0,tarefa)
+  end
+
+  def reiniciar(tarefas,x)when x>length(tarefas) do
+    tarefa=Tarefas.Tarefa.reiniciar(Enum.at(tarefas,-1))
+    tarefas=List.replace_at(tarefas,-1,tarefa)
+  end
+
+  def reiniciar(tarefas,x) do
+    tarefa=Tarefas.Tarefa.reiniciar(Enum.at(tarefas,x))
+    tarefas=List.replace_at(tarefas,x,tarefa)
   end
 end
