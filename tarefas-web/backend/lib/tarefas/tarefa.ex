@@ -14,7 +14,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os mesmo dados e estado "completada"
   """
-  def completar(_) do
+  def completar(%Tarefa{id: id,descricao: descricao, estado: estado}) do
+    %Tarefa{id: id,descricao: descricao,estado: "completada"}
   end
 
   @doc """
@@ -22,7 +23,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os mesmo dados e estado "sem_completar"
   """
-  def reiniciar(_) do
+  def reiniciar(%Tarefa{id: id,descricao: descricao, estado: estado}) do
+    %Tarefa{id: id,descricao: descricao,estado: "sem_completar"}
   end
 
   @doc """
@@ -30,7 +32,8 @@ defmodule Tarefas.Tarefa do
 
   Retorna verdadeiro se seu estado for "completada" ou falso se não
   """
-  def completada?(_) do
+  def completada?(%Tarefa{id: id,descricao: descricao, estado: estado}) do
+    estado==="completada"
   end
 
   @doc """
@@ -38,7 +41,8 @@ defmodule Tarefas.Tarefa do
 
   Codifica a struct numa string com o formato "id,descricao,estado"
   """
-  def codificar(_) do
+  def codificar(%Tarefa{id: id,descricao: descricao, estado: estado}) do
+    "#{id},#{descricao},#{estado}"
   end
 
   @doc """
@@ -46,14 +50,35 @@ defmodule Tarefas.Tarefa do
 
   Retorna uma struct do tipo Tarefa com os conteúdos da string
   """
-  def decodificar(_) do
+  def decodificar(string) do
+    string=String.split(string,",")
+    %Tarefa{id: Enum.at(string,0),descricao: Enum.at(string,1), estado: Enum.at(string,2)}
   end
+
 
   @doc """
   Recebe uma struct do tipo tarefa
 
   Imprime a struct no console
   """
-  def imprimir(_) do
+  def imprimir( %Tarefa{id: id,descricao: tarefa,estado: estado}) do
+      IO.puts(tarefa)
   end
+
+  def strToList(%Tarefa{id: id,descricao: descricao, estado: estado})do
+    [id,descricao,estado]
+  end
+
+  def getDescricao(%Tarefa{id: id,descricao: descricao, estado: estado})do
+      descricao
+  end
+
+  def getEstado(%Tarefa{id: id,descricao: descricao, estado: estado})do
+    estado
+  end
+
+  def getId(%Tarefa{id: id,descricao: descricao, estado: estado})do
+    id
+  end
+
 end

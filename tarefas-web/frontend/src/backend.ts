@@ -30,8 +30,8 @@ const Backend = {
   },
 
   completar(posicao: number) {
-    return fetch(`${BACKEND_API_URL}/tarefas/completadas/${posicao}`, {
-      method: "POST",
+    return fetch(`${BACKEND_API_URL}/tarefas/completar/${posicao}`, {
+      method: "PUT",
     });
   },
 

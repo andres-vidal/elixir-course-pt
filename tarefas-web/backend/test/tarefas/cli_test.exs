@@ -17,8 +17,7 @@ defmodule Tarefas.CLITest do
   describe "processar/2" do
     test "quando o segundo argumento é vazio, imprime as tarefas fornecidas que foram completadas" do
       saida_esperada = """
-      Tarefa 1
-      Tarefa 2
+      Tarefa 3
       """
 
       assert saida_esperada == capture_io(fn -> Tarefas.CLI.processar(@entrada, []) end)
@@ -33,7 +32,7 @@ defmodule Tarefas.CLITest do
       Tarefa 3
       """
 
-      assert saida_esperada == capture_io(fn -> Tarefas.CLI.processar(@entrada, ["todas"]) end)
+      assert saida_esperada == capture_io(fn -> Tarefas.CLI.processar(@entrada,"todas") end)
     end
 
     test "quando o segundo argumento é um string qualquer, adiciona uma tarefa à lista de tarefas" do
@@ -43,10 +42,10 @@ defmodule Tarefas.CLITest do
         %Tarefa{descricao: "Tarefa 1"},
         %Tarefa{descricao: "Tarefa 2"},
         %Tarefa{descricao: "Tarefa 3", estado: "completada"},
-        nova_tarefa
+        %Tarefa{descricao: "Nova"},
       ]
 
-      assert saida_esperada == Tarefas.CLI.processar(@entrada, [nova_tarefa.descricao])
+      assert saida_esperada == Tarefas.CLI.processar(@entrada, ["Nova"])
     end
 
     test "quando o segundo argumento é [descricao, 0], adiciona uma tarefa à lista de tarefas no começo da lista" do

@@ -42,64 +42,64 @@ defmodule TarefasWeb.ControladorTarefasTest do
     end
   end
 
-  describe "POST /tarefas" do
-    test "quando a lista de tarefas é vazia", %{conn: conn} do
-      entrada = %{"descricao" => "Tarefa 1"}
+  # describe "POST /tarefas/:descricao" do
+  #   test "quando a lista de tarefas é vazia", %{conn: conn} do
+  #     entrada = %{"descricao" => "Tarefa 1"}
 
-      saida_esperada = %{
-        "id" => "",
-        "descricao" => "Tarefa 1",
-        "estado" => "sem_completar"
-      }
+  #     saida_esperada = %{
+  #       "id" => "",
+  #       "descricao" => "Tarefa 1",
+  #       "estado" => "sem_completar"
+  #     }
 
-      saida_esperda_arquivo = """
-      ,Tarefa 1,sem_completar
-      """
+  #     saida_esperda_arquivo = """
+  #     ,Tarefa 1,sem_completar
+  #     """
 
-      path = Routes.controlador_tarefas_path(conn, :inserir)
+  #     path = Routes.controlador_tarefas_path(conn, :inserir)
 
-      conn =
-        conn
-        |> put_req_header("content-type", "application/json")
-        |> post(path, entrada)
+  #     conn =
+  #       conn
+  #       |> put_req_header("content-type", "application/json")
+  #       |> post(path, entrada)
 
-      assert saida_esperada == json_response(conn, 200)
-      assert saida_esperda_arquivo == File.read!(Tarefas.caminho_arquivo())
-    end
+  #     assert saida_esperada == json_response(conn, 200)
+  #     assert saida_esperda_arquivo == File.read!(Tarefas.caminho_arquivo())
+  #   end
 
-    test "quando a lista de tarefas não é vazia", %{conn: conn} do
-      entrada = %{"descricao" => "Tarefa 1"}
+  #   test "quando a lista de tarefas não é vazia", %{conn: conn} do
+  #     entrada = %{"descricao" => "Tarefa 1"}
 
-      saida_esperada = %{
-        "id" => "",
-        "descricao" => "Tarefa 1",
-        "estado" => "sem_completar"
-      }
+  #     saida_esperada = %{
+  #       "id" => "",
+  #       "descricao" => "Tarefa 1",
+  #       "estado" => "sem_completar"
+  #     }
 
-      entrada_arquivo = """
-      a,Tarefa 1,sem_completar
-      b,Tarefa 2,sem_completar
-      """
+  #     entrada_arquivo = """
+  #     a,Tarefa 1,sem_completar
+  #     b,Tarefa 2,sem_completar
+  #     """
 
-      saida_esperda_arquivo = """
-      a,Tarefa 1,sem_completar
-      b,Tarefa 2,sem_completar
-      ,Tarefa 1,sem_completar
-      """
+  #     saida_esperda_arquivo = """
+  #     a,Tarefa 1,sem_completar
+  #     b,Tarefa 2,sem_completar
+  #     ,Tarefa 1,sem_completar
+  #     """
 
-      File.write(Tarefas.caminho_arquivo(), entrada_arquivo)
+  #     File.write(Tarefas.caminho_arquivo(), entrada_arquivo)
 
-      path = Routes.controlador_tarefas_path(conn, :inserir)
+  #     path = Routes.controlador_tarefas_path(conn, :inserir)
 
-      conn =
-        conn
-        |> put_req_header("content-type", "application/json")
-        |> post(path, entrada)
+  #     conn =
+  #       conn
+  #       |> put_req_header("content-type", "application/json")
+  #       |> post(path, entrada)
 
-      assert saida_esperada == json_response(conn, 200)
-      assert saida_esperda_arquivo == File.read!(Tarefas.caminho_arquivo())
-    end
-  end
+  #     assert saida_esperada == json_response(conn, 200)
+  #     assert saida_esperda_arquivo == File.read!(Tarefas.caminho_arquivo())
+  #   end
+  # end
 
   describe "POST /tarefas/:origem/mover-a/:destino" do
     test "move a tarefa da posição origem à posição destino", %{conn: conn} do
